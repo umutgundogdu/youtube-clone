@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Chip, Toolbar, Grid } from "@mui/material";
 
+import "./App.css";
+
+// components
+import Navbar from "./components/Navbar";
+import Menu from "./components/Menu";
+import VideoCard from "./components/VideoCard";
+import Chips from "./components/Chips";
 function App() {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Grid
+        container
+        direction="column"
+        justifyContent="space-between"
+        alignItems="stretch"
+      >
+        <Grid item xs={4}>
+          <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
+        </Grid>
+        <Grid item xs={8}>
+          <Grid container>
+            <Grid item xs={2}>
+              <Menu isAuth={isAuth} setIsAuth={setIsAuth} />
+            </Grid>
+            <Grid container spacing={2} item xs={10}>
+              <Grid item md={12}>
+                <Toolbar sx={{ overflowX: "auto" }}>
+                  <Chips />
+                </Toolbar>
+              </Grid>
+              <VideoCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
